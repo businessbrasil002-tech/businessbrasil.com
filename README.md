@@ -1,0 +1,986 @@
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUSINESS BRASIL - Hamburgueria Artesanal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .menu-item:hover .menu-item-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .menu-item-overlay {
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .cart-item-enter {
+            animation: cartItemEnter 0.3s ease-out;
+        }
+        @keyframes cartItemEnter {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .floating-button {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Header/Navbar -->
+    <header class="bg-red-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png" alt="Logo" class="h-10 w-10 mr-3">
+                <h1 class="text-2xl font-bold">BUSINESS BRASIL</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="cartButton" class="relative">
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-yellow-400 text-red-700 rounded-full h-6 w-6 flex items-center justify-center text-sm font-bold">0</span>
+                </button>
+                <button class="bg-yellow-400 text-red-700 px-4 py-2 rounded-full font-bold hover:bg-yellow-300 transition">Login</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative h-96 bg-gray-900 overflow-hidden">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1998&q=80" alt="Hambúrgueres" class="w-full h-full object-cover">
+        <div class="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
+            <h2 class="text-4xl md:text-6xl font-bold mb-4">OS MELHORES HAMBÚRGUERES</h2>
+            <p class="text-xl mb-8">Feitos com ingredientes selecionados e muito sabor!</p>
+            <a href="#menu" class="bg-red-700 hover:bg-red-600 text-white px-8 py-3 rounded-full text-lg font-bold transition">VER CARDÁPIO</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">NOSSO CARDÁPIO</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="menu-">
+                    <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="Hambúrguer Clássico" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Clássico</h3>
+                        <p class="text-gray-600 mt-2">Pão brioche, hambúrguer 180g, queijo, alface, tomate e molho especial</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 25,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="1" data-name="Clássico" data-price="25.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="menu-item-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+                        <button class="customize-btn bg-yellow-400 hover:bg-yellow-300 text-red-700 px-6 py-3 rounded-full font-bold transition" data-id="1">
+                            <i class="fas fa-utensils mr-2"></i> Personalizar
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="menu-">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1998&q=80" alt="Hambúrguer Bacon" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Bacon Crunch</h3>
+                        <p class="text-gray-600 mt-2">Pão brioche, hambúrguer 180g, queijo, bacon crocante, cebola caramelizada</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 29,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="2" data-name="Bacon Crunch" data-price="29.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="menu-item-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+                        <button class="customize-btn bg-yellow-400 hover:bg-yellow-300 text-red-700 px-6 py-3 rounded-full font-bold transition" data-id="2">
+                            <i class="fas fa-utensils mr-2"></i> Personalizar
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="menu-">
+                    <img src="https://images.unsplash.com/photo-1603064752734-4c48eff53d05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1588&q=80" alt="Hambúrguer Duplo" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Vegetariano</h3>
+                        <p class="text-gray-600 mt-2">Pão integral, hambúrguer de grão-de-bico, queijo vegano, rúcula, tomate seco</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 27,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="3" data-name="Vegetariano" data-price="27.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="menu-item-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+                        <button class="customize-btn bg-yellow-400 hover:bg-yellow-300 text-red-700 px-6 py-3 rounded-full font-bold transition" data-id="3">
+                            <i class="fas fa-utensils mr-2"></i> Personalizar
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Item 4 -->
+                <div class="menu-">
+                    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1998&q=80" alt="Hambúrguer Vegetariano" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Duplo Cheese</h3>
+                        <p class="text-gray-600 mt-2">Pão brioche, 2 hambúrgueres 180g, 2 queijos, picles, cebola roxa, molho especial</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 34,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="4" data-name="Duplo Cheese" data-price="34.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="menu-item-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+                        <button class="customize-btn bg-yellow-400 hover:bg-yellow-300 text-red-700 px-6 py-3 rounded-full font-bold transition" data-id="4">
+                            <i class="fas fa-utensils mr-2"></i> Personalizar
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Item 5 -->
+                <div class="menu-">
+                    <img src="https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80" alt="Hambúrguer Frango" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Frango Crocante</h3>
+                        <p class="text-gray-600 mt-2">Pão brioche, filé de frango empanado, queijo, alface, tomate, molho de iogurte</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 26,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="5" data-name="Frango Crocante" data-price="26.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="menu-item-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+                        <button class="customize-btn bg-yellow-400 hover:bg-yellow-300 text-red-700 px-6 py-3 rounded-full font-bold transition" data-id="5">
+                            <i class="fas fa-utensils mr-2"></i> Personalizar
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Item 6 -->
+                <div class="menu-">
+                    <img src="https://images.unsplash.com/photo-1541592106381-b31e9677c0e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Batata Frita" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Batata Frita</h3>
+                        <p class="text-gray-600 mt-2">Porção de batata frita crocante com molho especial</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 15,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="6" data-name="Batata Frita" data-price="15.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="menu-item-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+                        <button class="customize-btn bg-yellow-400 hover:bg-yellow-300 text-red-700 px-6 py-3 rounded-full font-bold transition" data-id="6">
+                            <i class="fas fa-utensils mr-2"></i> Personalizar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 7 - Bebidas -->
+                <div class="menu-item relative bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <img src="https://superprix.vteximg.com.br/arquivos/ids/226349-600-600/684856_2.jpg?v=638774010963130000?" alt="Coca-Cola" class="w-full h-48 object-contain bg-white">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Refrigerante</h3>
+                        <p class="text-gray-600 mt-2">Garrafa 1L - Coca-Cola, Guaraná, Fanta ou Sprite</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 12,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="7" data-name="Refrigerante" data-price="7.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 8 - Bebidas -->
+                <div class="menu-item relative bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1600271886742-f049cd451bba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1587&q=80" alt="Suco Natural" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Suco Natural</h3>
+                        <p class="text-gray-600 mt-2">Copo 500ml - Laranja, Maracujá, Limão ou Abacaxi</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 12,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="8" data-name="Suco Natural" data-price="12.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 9 - Bebidas -->
+                <div class="menu-item relative bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-xl">
+                    <img src="https://media.istockphoto.com/id/803155598/pt/foto/close-up-the-pouring-purified-fresh-drink-water-from-the-bottle-on-table-in-living-room.jpg?s=612x612&w=0&k=20&c=poAzWQVuYcbvkHB286wDtyonIEXjSzCEOVhTORJCoUM=" alt="Copo de Água" class="w-full h-48 object-contain bg-gray-100">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Água Mineral</h3>
+                        <p class="text-gray-600 mt-2">Copo 500ml - Com ou sem gás</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 5,90</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="9" data-name="Água Mineral" data-price="5.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 10 - Bomboniere -->
+                <div class="menu-">
+                    <img src="https://superprix.vteximg.com.br/arquivos/ids/226208-600-600/1633_Tablete_de_Chocolate_80_Gramas_Lacta_Laka_1.jpg.jpg?v=638773140286770000" alt="Bomboniere" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-800">Bomboniere</h3>
+                        <p class="text-gray-600 mt-2">Barra de Chocolate Laka</p>
+                        <p class="text-gray-600 mt-2">Bombom Garoto</p>
+                        <p class="text-gray-600 mt-2">Bala House</p>
+                        <div class="flex justify-between items-center mt-4">
+                            <span class="text-2xl font-bold text-red-700">R$ 5,50</span>
+                            <button class="add-to-cart bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded-full transition" data-id="10" data-name="Bomboniere" data-price="15.90">
+                                <i class="fas fa-plus"></i> Adicionar
+                            </button>
+                        </div>
+                    </div>
+                    <div class="menu-item-overlay absolute inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+                        <button class="customize-btn bg-yellow-400 hover:bg-yellow-300 text-red-700 px-6 py-3 rounded-full font-bold transition" data-id="6">
+                            <i class="fas fa-utensils mr-2"></i> Personalizar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button id="customBurgerBtn" class="floating-button bg-yellow-400 hover:bg-yellow-300 text-red-700 px-8 py-4 rounded-full text-lg font-bold transition">
+                    <i class="fas fa-hamburger mr-2"></i> MONTE SEU LANCHE
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Burger Modal -->
+    <div id="customBurgerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-screen overflow-y-auto">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Monte Seu Lanche</h3>
+                    <button id="closeCustomModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Pães -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-4 text-gray-800">Escolha seu pão</h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="bread" value="Brioche" class="form-radio text-red-600" checked>
+                                <span>Brioche (+R$ 3,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="bread" value="Australiano" class="form-radio text-red-600">
+                                <span>Australiano (+R$ 3,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                               <input type="radio" name="bread" value="Integral" class="form-radio text-red-600">
+                                <span>Integral (+R$ 3,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="bread" value="Gergelim" class="form-radio text-red-600">
+                                <span>Gergelim (+R$ 3,00)</span>
+                            </label>
+                        </div>
+                    </div>
+                                    
+                    <!-- Carnes -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-4 text-gray-800">Escolha sua carne</h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="meat" value="Bovino 180g" class="form-radio text-red-600" checked>
+                                <span>Bovino 180g (+R$ 6,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="meat" value="Bovino 250g" class="form-radio text-red-600">
+                                <span>Bovino 250g (+R$ 9,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="meat" value="Frango" class="form-radio text-red-600">
+                                <span>Frango (+R$ 6,50)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="meat" value="Vegetariano" class="form-radio text-red-600">
+                                <span>Vegetariano (+R$ 8,00)</span>
+                            </label>
+                        </div>
+                    </div>
+                                    
+                    <!-- Queijos -->
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h4 class="font-bold text-lg mb-4 text-gray-800">Escolha seu queijo</h4>
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="cheese" value="Cheddar" class="form-radio text-red-600" checked>
+                                <span>Cheddar (+R$ 4,50)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="cheese" value="Prato" class="form-radio text-red-600">
+                                <span>Prato (+R$ 0,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="cheese" value="Suíço" class="form-radio text-red-600">
+                                <span>Suíço (+R$ 4,50)</span>
+                            </label>
+                            <label class="flex items-center space-x-3">
+                                <input type="radio" name="cheese" value="Sem queijo" class="form-radio text-red-600">
+                                <span>Sem queijo (-R$ 4,50)</span>
+                            </label>
+                        </div>
+                    </div>
+                                    
+                    <!-- Complementos -->
+                    <div class="bg-gray-50 p-4 rounded-lg md:col-span-3">
+                        <h4 class="font-bold text-lg mb-4 text-gray-800">Complementos</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="toppings" value="Bacon" class="form-checkbox text-red-600">
+                                <span>Bacon (+R$ 8,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="toppings" value="Ovo" class="form-checkbox text-red-600">
+                                <span>Ovo (+R$ 2,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="toppings" value="Alface" class="form-checkbox text-red-600">
+                                <span>Alface (+R$ 1,50)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="toppings" value="Tomate" class="form-checkbox text-red-600">
+                                <span>Tomate (+R$ 1,50)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="toppings" value="Picles" class="form-checkbox text-red-600">
+                                <span>Picles (+R$ 1,50)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="toppings" value="Cebola Caramelizada" class="form-checkbox text-red-600">
+                                <span>Cebola Caramelizada (+R$ 1,50)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                                <input type="checkbox" name="toppings" value="Molho Especial" class="form-checkbox text-red-600">
+                                <span>Molho Especial (+R$ 2,00)</span>
+                            </label>
+                            <label class="flex items-center space-x-2">
+                               <input type="checkbox" name="toppings" value="Batata Palha" class="form-checkbox text-red-600">
+                                <span>Batata Palha (+R$ 2,00)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-6 bg-gray-100 p-4 rounded-lg">
+                    <h4 class="font-bold text-lg mb-2 text-gray-800">Resumo do Pedido</h4>
+                    <div id="customOrderSummary" class="mb-4">
+                        <p class="text-gray-600">Selecione os ingredientes para ver o resumo</p>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xl font-bold text-gray-800">Total: <span id="customOrderTotal">R$ 0,00</span></span>
+                        <button id="addCustomToCart" class="bg-red-700 hover:bg-red-600 text-white px-6 py-2 rounded-full font-bold transition">
+                            <i class="fas fa-cart-plus mr-2"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cartSidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-800">Seu Carrinho</h3>
+                <button id="closeCart" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            
+            <div id="cartItems" class="space-y-4 mb-6">
+                <!-- Cart items will be added here dynamically -->
+                <div class="text-center py-8 text-gray-500">
+                    <i class="fas fa-shopping-cart text-4xl mb-2"></i>
+                    <p>Seu carrinho está vazio</p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-200 pt-4 mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Subtotal</span>
+                    <span id="cartSubtotal" class="font-medium">R$ 0,00</span>
+                </div>
+                <div class="flex justify-between mb-2">
+                    <span class="text-gray-600">Taxa de Entrega</span>
+                    <span id="deliveryFee" class="font-medium">R$ 5,00</span>
+                </div>
+                <div class="flex justify-between text-lg font-bold">
+                    <span>Total</span>
+                    <span id="cartTotal" class="text-red-700">R$ 5,00</span>
+                </div>
+            </div>
+            
+            <!-- Delivery/Local Options -->
+            <div class="mb-6">
+                <div class="flex border-b border-gray-200">
+                    <button id="deliveryTab" class="flex-1 py-2 font-medium border-b-2 border-red-700 text-red-700">ENTREGA</button>
+                    <button id="localTab" class="flex-1 py-2 font-medium text-gray-500">LOCAL</button>
+                </div>
+                
+                <!-- Delivery Form -->
+                <div id="deliveryForm" class="mt-4 space-y-4">
+                    <div>
+                        <label for="deliveryName" class="block text-sm font-medium text-gray-700 mb-1">Nome*</label>
+                        <input type="text" id="deliveryName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+                    <div>
+                        <label for="deliveryAddress" class="block text-sm font-medium text-gray-700 mb-1">Endereço*</label>
+                        <input type="text" id="deliveryAddress" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+                    <div>
+                        <label for="deliveryPhone" class="block text-sm font-medium text-gray-700 mb-1">Telefone*</label>
+                        <input type="tel" id="deliveryPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+                </div>
+                
+                <!-- Local Form (hidden by default) -->
+                <div id="localForm" class="mt-4 space-y-4 hidden">
+                    <div>
+                        <label for="localName" class="block text-sm font-medium text-gray-700 mb-1">Nome*</label>
+                        <input type="text" id="localName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+                    <div>
+                        <label for="localPhone" class="block text-sm font-medium text-gray-700 mb-1">Telefone*</label>
+                        <input type="tel" id="localPhone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+                    <div>
+                        <label for="localTable" class="block text-sm font-medium text-gray-700 mb-1">Mesa*</label>
+                        <input type="text" id="localTable" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Submit Order Button (hidden until items are in cart) -->
+            <button id="submitOrder" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-lg font-bold hidden">
+                <i class="fas fa-paper-plane mr-2"></i> ENCAMINHAR PEDIDO
+            </button>
+        </div>
+    </div>
+    
+    <!-- Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">BUSINESS BRASIL</h3>
+                    <p class="text-gray-400">Os melhores hambúrgueres artesanais da cidade.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Horário de Funcionamento</h3>
+                    <p class="text-gray-400">Segunda a Sexta: 18h - 23h</p>
+                    <p class="text-gray-400">Sábado e Domingo: 12h - 23h</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contato</h3>
+                    <p class="text-gray-400"><i class="fas fa-phone-alt mr-2"></i> (38) 99985-7924</p>
+                    <p class="text-gray-400"><i class="fas fa-envelope mr-2"></i> businessbrasil002@gmail.com</p>
+                    <div class="flex space-x-4 mt-2">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
+                <p>&copy; 2025 BUSINESS BRASIL. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cart = [];
+        let orderNumber = 1;
+                
+        // DOM Elements
+        const cartButton = document.getElementById('cartButton');
+        const closeCart = document.getElementById('closeCart');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartSubtotal = document.getElementById('cartSubtotal');
+        const cartTotal = document.getElementById('cartTotal');
+        const overlay = document.getElementById('overlay');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const customizeButtons = document.querySelectorAll('.customize-btn');
+        const customBurgerBtn = document.getElementById('customBurgerBtn');
+        const customBurgerModal = document.getElementById('customBurgerModal');
+        const closeCustomModal = document.getElementById('closeCustomModal');
+        const addCustomToCart = document.getElementById('addCustomToCart');
+        const deliveryTab = document.getElementById('deliveryTab');
+        const localTab = document.getElementById('localTab');
+        const deliveryForm = document.getElementById('deliveryForm');
+        const localForm = document.getElementById('localForm');
+        const submitOrder = document.getElementById('submitOrder');
+                
+        // Event Listeners
+        cartButton.addEventListener('click', toggleCart);
+        closeCart.addEventListener('click', toggleCart);
+        overlay.addEventListener('click', closeAllModals);
+                
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = button.getAttribute('data-id');
+                const name = button.getAttribute('data-name');
+                const price = parseFloat(button.getAttribute('data-price'));
+                                
+                addToCart(id, name, price);
+            });
+        });
+                
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.customize-btn')) {
+                const button = e.target.closest('.customize-btn');
+                const id = button.getAttribute('data-id');
+                openCustomModal(id);
+            }
+        });
+                
+        customBurgerBtn.addEventListener('click', function() {
+            customBurgerModal.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+            updateCustomOrderSummary();
+        });
+        
+        closeCustomModal.addEventListener('click', function() {
+            customBurgerModal.classList.add('hidden');
+            overlay.classList.add('hidden');
+        });
+                
+        deliveryTab.addEventListener('click', () => {
+            deliveryTab.classList.add('border-b-2', 'border-red-700', 'text-red-700');
+            deliveryTab.classList.remove('text-gray-500');
+            localTab.classList.remove('border-b-2', 'border-red-700', 'text-red-700');
+            localTab.classList.add('text-gray-500');
+            deliveryForm.classList.remove('hidden');
+            localForm.classList.add('hidden');
+        });
+                
+        localTab.addEventListener('click', () => {
+            localTab.classList.add('border-b-2', 'border-red-700', 'text-red-700');
+            localTab.classList.remove('text-gray-500');
+            deliveryTab.classList.remove('border-b-2', 'border-red-700', 'text-red-700');
+            deliveryTab.classList.add('text-gray-500');
+            localForm.classList.remove('hidden');
+            deliveryForm.classList.add('hidden');
+        });
+                
+        submitOrder.addEventListener('click', function(e) {
+            e.preventDefault();
+            submitOrderHandler();
+        });
+                
+        // Custom burger form listeners
+        document.querySelectorAll('input[name="bread"], input[name="meat"], input[name="cheese"], input[name="toppings"]').forEach(input => {
+            input.addEventListener('change', updateCustomOrderSummary);
+        });
+                
+        addCustomToCart.addEventListener('click', addCustomBurgerToCart);
+                
+        // Functions
+        function toggleCart() {
+            cartSidebar.classList.toggle('translate-x-full');
+            cartSidebar.classList.toggle('translate-x-0');
+                        
+            if (cartSidebar.classList.contains('translate-x-full')) {
+                overlay.classList.add('hidden');
+            } else {
+                overlay.classList.remove('hidden');
+                updateCartDisplay();
+            }
+        }
+                
+        function closeAllModals() {
+            cartSidebar.classList.add('translate-x-full');
+            cartSidebar.classList.remove('translate-x-0');
+            customBurgerModal.classList.add('hidden');
+            overlay.classList.add('hidden');
+        }
+                
+        function addToCart(id, name, price, customIngredients = null) {
+            const existingItem = cart.find(item => item.id === id && JSON.stringify(item.customIngredients) === JSON.stringify(customIngredients));
+                        
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id,
+                    name,
+                    price,
+                    quantity: 1,
+                    customIngredients
+                });
+            }
+                        
+            updateCartCount();
+            updateCartDisplay();
+                        
+            // Show success feedback
+            const button = document.querySelector(`.add-to-cart[data-id="${id}"]`);
+            if (button) {
+                button.innerHTML = '<i class="fas fa-check"></i> Adicionado';
+                button.classList.remove('bg-red-700', 'hover:bg-red-600');
+                button.classList.add('bg-green-600', 'hover:bg-green-500');
+                                
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-plus"></i> Adicionar';
+                    button.classList.remove('bg-green-600', 'hover:bg-green-500');
+                    button.classList.add('bg-red-700', 'hover:bg-red-600');
+                }, 2000);
+            }
+        }
+                
+        function updateCartCount() {
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = count;
+                        
+            if (count > 0) {
+                cartCount.classList.remove('hidden');
+            } else {
+                cartCount.classList.add('hidden');
+            }
+        }
+                
+        function updateCartDisplay() {
+            if (cart.length === 0) {
+                cartItems.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        <i class="fas fa-shopping-cart text-4xl mb-2"></i>
+                        <p>Seu carrinho está vazio</p>
+                    </div>
+                `;
+                cartSubtotal.textContent = 'R$ 0,00';
+                cartTotal.textContent = 'R$ 5,00';
+                submitOrder.classList.add('hidden');
+                return;
+            }
+                        
+            let itemsHTML = '';
+            let subtotal = 0;
+                        
+            cart.forEach((item, index) => {
+                subtotal += item.price * item.quantity;
+                                
+                itemsHTML += `
+                    <div class="cart-item-enter flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="font-medium">${item.name}</h4>
+                            ${item.customIngredients ? `<p class="text-xs text-gray-500 mt-1">${formatCustomIngredients(item.customIngredients)}</p>` : ''}
+                        </div>
+                        <div class="flex items-center">
+                            <button class="decrease-quantity px-2 py-1 bg-gray-200 rounded-l-lg" data-index="${index}">
+                                <i class="fas fa-minus text-xs"></i>
+                            </button>
+                            <span class="quantity px-3 py-1 bg-gray-100">${item.quantity}</span>
+                            <button class="increase-quantity px-2 py-1 bg-gray-200 rounded-r-lg" data-index="${index}">
+                                <i class="fas fa-plus text-xs"></i>
+                            </button>
+                            <span class="ml-4 font-medium">R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}</span>
+                            <button class="remove-item ml-4 text-red-600" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+                        
+            cartItems.innerHTML = itemsHTML;
+            cartSubtotal.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+            const total = subtotal + 5; // Adding delivery fee
+            cartTotal.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+                        
+            // Show submit button if there are items
+            submitOrder.classList.remove('hidden');
+                        
+            // Add event listeners to quantity buttons
+            document.querySelectorAll('.increase-quantity').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.closest('button').getAttribute('data-index');
+                    cart[index].quantity += 1;
+                    updateCartDisplay();
+                    updateCartCount();
+                });
+            });
+                        
+            document.querySelectorAll('.decrease-quantity').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.closest('button').getAttribute('data-index');
+                    if (cart[index].quantity > 1) {
+                        cart[index].quantity -= 1;
+                    } else {
+                        cart.splice(index, 1);
+                    }
+                    updateCartDisplay();
+                    updateCartCount();
+                });
+            });
+                        
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.closest('button').getAttribute('data-index');
+                    cart.splice(index, 1);
+                    updateCartDisplay();
+                    updateCartCount();
+                });
+            });
+        }
+                
+        function formatCustomIngredients(ingredients) {
+            let parts = [];
+            if (ingredients.bread) parts.push(`Pão: ${ingredients.bread}`);
+            if (ingredients.meat) parts.push(`Carne: ${ingredients.meat}`);
+            if (ingredients.cheese) parts.push(`Queijo: ${ingredients.cheese}`);
+            if (ingredients.toppings && ingredients.toppings.length > 0) {
+                parts.push(`Adicionais: ${ingredients.toppings.join(', ')}`);
+            }
+            return parts.join(' | ');
+        }
+                
+        function openCustomModal(id = null) {
+            // Reset form
+            document.querySelector('input[name="bread"][value="Brioche"]').checked = true;
+            document.querySelector('input[name="meat"][value="Bovino 180g"]').checked = true;
+            document.querySelector('input[name="cheese"][value="Cheddar"]').checked = true;
+            document.querySelectorAll('input[name="toppings"]').forEach(checkbox => {
+                checkbox.checked = false;
+            });
+                        
+            // If editing an existing custom burger
+            if (id) {
+                const item = cart.find(item => item.id === id && item.customIngredients);
+                if (item) {
+                    // Pre-fill the form with the existing custom burger details
+                    document.querySelector(`input[name="bread"][value="${item.customIngredients.bread}"]`).checked = true;
+                    document.querySelector(`input[name="meat"][value="${item.customIngredients.meat}"]`).checked = true;
+                    document.querySelector(`input[name="cheese"][value="${item.customIngredients.cheese}"]`).checked = true;
+                                    
+                    item.customIngredients.toppings.forEach(topping => {
+                        document.querySelector(`input[name="toppings"][value="${topping}"]`).checked = true;
+                    });
+                }
+            }
+                        
+            updateCustomOrderSummary();
+            customBurgerModal.classList.remove('hidden');
+            overlay.classList.remove('hidden');
+        }
+                
+        function updateCustomOrderSummary() {
+            const bread = document.querySelector('input[name="bread"]:checked').value;
+            const meat = document.querySelector('input[name="meat"]:checked').value;
+            const cheese = document.querySelector('input[name="cheese"]:checked').value;
+            const toppings = Array.from(document.querySelectorAll('input[name="toppings"]:checked')).map(el => el.value);
+                        
+            // Calculate base price
+            let basePrice = 20.00; // Base price for custom burger
+                        
+            // Add bread extras
+            if (bread === "Australiano") basePrice += 3.00;
+            if (bread === "Integral") basePrice += 3.00;
+            if (bread === "Gergelim") basePrice += 3.00;
+                        
+            // Add meat extras
+            if (meat === "Bovino 180g") basePrice += 6.00;
+            if (meat === "Bovino 250g") basePrice += 9.00;
+            if (meat === "Frango") basePrice += 6.50;
+            if (meat === "Vegetariano") basePrice += 8.00;
+                        
+            // Add cheese extras
+            if (cheese === "Cheddar") basePrice += 4.50;
+            if (cheese === "Suíço") basePrice += 4.50;
+            if (cheese === "Sem queijo") basePrice -= 4.50;
+                        
+            // Add toppings
+            toppings.forEach(topping => {
+                if (topping === "Bacon") basePrice += 3.50;
+                if (topping === "Ovo") basePrice += 2.00;
+                if (topping === "Alface") basePrice += 0.50;
+                if (topping === "Tomate") basePrice += 0.50;
+                if (topping === "Picles") basePrice += 1.00;
+                if (topping === "Cebola Caramelizada") basePrice += 1.50;
+                if (topping === "Molho Especial") basePrice += 1.50;
+                if (topping === "Batata Palha") basePrice += 1.00;
+            });
+                        
+            // Update summary
+            let summaryHTML = `
+                <p><strong>Pão:</strong> ${bread}</p>
+                <p><strong>Carne:</strong> ${meat}</p>
+                <p><strong>Queijo:</strong> ${cheese}</p>
+            `;
+                        
+            if (toppings.length > 0) {
+                summaryHTML += `<p><strong>Adicionais:</strong> ${toppings.join(', ')}</p>`;
+            }
+                        
+            document.getElementById('customOrderSummary').innerHTML = summaryHTML;
+            document.getElementById('customOrderTotal').textContent = `R$ ${basePrice.toFixed(2).replace('.', ',')}`;
+        }
+                
+        function addCustomBurgerToCart() {
+            const bread = document.querySelector('input[name="bread"]:checked').value;
+            const meat = document.querySelector('input[name="meat"]:checked').value;
+            const cheese = document.querySelector('input[name="cheese"]:checked').value;
+            const toppings = Array.from(document.querySelectorAll('input[name="toppings"]:checked')).map(el => el.value);
+                        
+            // Calculate price (same as in updateCustomOrderSummary)
+            let basePrice = 20.00;
+            if (bread === "Australiano") basePrice += 2.00;
+            if (bread === "Integral") basePrice += 1.50;
+            if (bread === "Gergelim") basePrice += 1.00;
+            if (meat === "Bovino 250g") basePrice += 8.00;
+            if (cheese === "Suíço") basePrice += 2.00;
+            if (cheese === "Sem queijo") basePrice -= 2.00;
+                        
+            toppings.forEach(topping => {
+                if (topping === "Bacon") basePrice += 3.50;
+                if (topping === "Ovo") basePrice += 2.00;
+                if (topping === "Alface") basePrice += 0.50;
+                if (topping === "Tomate") basePrice += 0.50;
+                if (topping === "Picles") basePrice += 1.00;
+                if (topping === "Cebola Caramelizada") basePrice += 1.50;
+                if (topping === "Molho Especial") basePrice += 1.50;
+                if (topping === "Batata Palha") basePrice += 1.00;
+            });
+                        
+            const customIngredients = {
+                bread,
+                meat,
+                cheese,
+                toppings
+            };
+                        
+            addToCart('custom-' + Date.now(), 'Lanche Personalizado', basePrice, customIngredients);
+            customBurgerModal.classList.add('hidden');
+            overlay.classList.add('hidden');
+            toggleCart();
+        }
+                
+        function submitOrderHandler() {
+            // Validate form
+            let isValid = true;
+            let customerInfo = {};
+                        
+            if (deliveryForm.classList.contains('hidden')) {
+                // Local order
+                const name = document.getElementById('localName').value.trim();
+                const phone = document.getElementById('localPhone').value.trim();
+                const table = document.getElementById('localTable').value.trim();
+                                
+                if (!name || !phone || !table) {
+                    isValid = false;
+                    alert('Por favor, preencha todos os campos obrigatórios.');
+                } else {
+                    customerInfo = {
+                        type: 'local',
+                        name,
+                        phone,
+                        table
+                    };
+                }
+            } else {
+                // Delivery order
+                const name = document.getElementById('deliveryName').value.trim();
+                const address = document.getElementById('deliveryAddress').value.trim();
+                const phone = document.getElementById('deliveryPhone').value.trim();
+                                
+                if (!name || !address || !phone) {
+                    isValid = false;
+                    alert('Por favor, preencha todos os campos obrigatórios.');
+                } else {
+                    customerInfo = {
+                        type: 'delivery',
+                        name,
+                        address,
+                        phone
+                    };
+                }
+            }
+                        
+            if (!isValid) return;
+                        
+            // Calculate total
+            const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+            const total = subtotal + 5; // Delivery fee
+                        
+            // Generate order details for WhatsApp
+            let whatsappMessage = `*NOVO PEDIDO - BUSINESS BRASIL*%0A%0A`;
+            whatsappMessage += `*Cliente:* ${customerInfo.name}%0A`;
+            whatsappMessage += `*Telefone:* ${customerInfo.phone}%0A`;
+                        
+            if (customerInfo.type === 'delivery') {
+                whatsappMessage += `*Tipo:* Entrega%0A`;
+                whatsappMessage += `*Endereço:* ${customerInfo.address}%0A%0A`;
+            } else {
+                whatsappMessage += `*Tipo:* No Local%0A`;
+                whatsappMessage += `*Mesa:* ${customerInfo.table}%0A%0A`;
+            }
+                        
+            whatsappMessage += `*ITENS DO PEDIDO:*%0A`;
+                        
+            cart.forEach(item => {
+                whatsappMessage += `- ${item.quantity}x ${item.name} - R$ ${(item.price * item.quantity).toFixed(2).replace('.', ',')}%0A`;
+                if (item.customIngredients) {
+                    whatsappMessage += `  _${formatCustomIngredients(item.customIngredients)}_%0A`;
+                }
+            });
+                        
+            whatsappMessage += `%0A*Subtotal:* R$ ${subtotal.toFixed(2).replace('.', ',')}%0A`;
+            whatsappMessage += `*Taxa de Entrega:* R$ 5,00%0A`;
+            whatsappMessage += `*TOTAL:* R$ ${total.toFixed(2).replace('.', ',')}`;
+                        
+            // Open WhatsApp with the order details
+            window.open(`https://wa.me/5538999857924?text=${whatsappMessage}`, '_blank');
+                        
+            // Clear cart
+            cart = [];
+            updateCartCount();
+            updateCartDisplay();
+                        
+            // Reset forms
+            document.getElementById('deliveryName').value = '';
+            document.getElementById('deliveryAddress').value = '';
+            document.getElementById('deliveryPhone').value = '';
+            document.getElementById('localName').value = '';
+            document.getElementById('localPhone').value = '';
+            document.getElementById('localTable').value = '';
+                        
+            // Switch back to delivery tab
+            deliveryTab.click();
+        }
+    </script>
+</body>
+</html>
